@@ -5,26 +5,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <title>Document</title>
 </head>
 <body>
     <h1>Wacky Widgets</h1>
-
-<hr>
-{% if widgets|length == 0 %}
-<h3>No Widgets Exist</h3>
-<hr>
-{% else%}
-    <ul>    
-    {% for widget in widgets %}
-        <li>Name: </li>{{ widget.description }}</li>
-        <li>Quantity</li>{{ widget.quantity }}</li>
-    {% endfor %}
     <hr>
-    </ul>
+    {% if widgets|length == 0 %}
+<h3>No Widgets Exist</h3>
+    {% else %}
+    <div>
+        <table class="pure-table pure-table-striped">
+            <tr>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Delete</th>
+            </tr>
+        {% for widget in widgets %}
 
-{% endif %}
+        <tr>
+        <td>{{ widget.description }}</td>
+        <td>{{ widget.quantity }}</td>
+        <td class="table a"><a href="{% url 'fast_delete' widget.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+ <hr>
+ <h4>Add A Widget</h4>
+ <div><form class pure-form method="POST" action="{% url 'addnewwidget' %}">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>
+                Description: <input type="text" name="description">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Quantity: <input type="number" name="quantity">
+            </td>
+        </tr>
+    </table>
+ <input type="submit" class="pure-button" value="Add New Widget">
+    </form>
+</div>
+
+<hr>
+
+
+
+
 
 </body>
 </html>

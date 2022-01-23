@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Widget(models.Model): #add class of Widgets, with form model.
+class WidgetForm(models.Model): #add class of Widgets, with form model.
     description = models.CharField(max_length=50)  #project requirement
     quantity = models.IntegerField()            #project requirement
 

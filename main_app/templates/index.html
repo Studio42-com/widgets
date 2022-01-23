@@ -10,6 +10,21 @@
 </head>
 <body>
     <h1>Wacky Widgets</h1>
-    
+
+<hr>
+{% if widgets|length == 0 %}
+<h3>No Widgets Exist</h3>
+<hr>
+{% else%}
+    <ul>    
+    {% for widget in widgets %}
+        <li>Name: </li>{{ widget.description }}</li>
+        <li>Quantity</li>{{ widget.quantity }}</li>
+    {% endfor %}
+    <hr>
+    </ul>
+
+{% endif %}
+
 </body>
 </html>
